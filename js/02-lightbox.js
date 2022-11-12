@@ -7,9 +7,9 @@ const galleryList = document.querySelector(".gallery");
 const galleryEls = galleryItems
   .map(
     ({ preview, description, original }) =>
-      `<a class="gallery__item" href="${original}">
-        <img class="gallery__image" src="${preview}" alt="${description}" title="${description}"/>
-      </a>`
+      `<li><a class="gallery__item" href="${original}">
+        <img class="gallery__image" src="${preview}" alt="${description}"/>
+      </a></li>`
   )
   .join("");
 
@@ -17,4 +17,6 @@ galleryList.insertAdjacentHTML("beforeend", galleryEls);
 
 new SimpleLightbox(".gallery a", {
   captionDelay: 250,
+  captionsData: "alt",
+  captionPosition: "bottom",
 });

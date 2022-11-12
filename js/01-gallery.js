@@ -21,7 +21,6 @@ const galleryEls = galleryItems
 
 galleryList.insertAdjacentHTML("beforeend", galleryEls);
 galleryList.addEventListener("click", onClickGalleryList);
-galleryList.addEventListener("keydown", onEscKeyPress);
 
 let instance;
 
@@ -35,8 +34,14 @@ function onClickGalleryList(e) {
 
   const imageUrl = e.target.dataset.source;
 
-  instance = basicLightbox.create(`
-		<img src="${imageUrl}">`);
+  instance = basicLightbox.create(
+    `
+		<img src="${imageUrl}">`,
+    {
+      onShow: () => window.addEventListener("keydown", onEscKeyPress),
+      onClose: () => window.addEventListener("keydown", onEscKeyPress),
+    }
+  );
 
   instance.show();
 }
